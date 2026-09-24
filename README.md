@@ -58,4 +58,3 @@ Python, Pandas, Scikit-learn, SQL, Excel
 - Try XGBoost/LightGBM for potentially better performance
 - Use SMOTE for oversampling instead of class weighting
 - Deploy as a simple API endpoint
-- 
