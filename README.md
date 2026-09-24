@@ -1,32 +1,112 @@
-# Credit Card Fraud Detection — Risk & Transaction Analytics Project
+# 💳 Credit Card Fraud Detection — Risk Analytics Project
 
-## Objective
-Analyze transaction data to identify patterns associated with fraud, and build 
-classification models to detect fraudulent transactions — combining SQL-based 
-exploratory analysis, an Excel dashboard, and machine learning models.
+## 📌 Project Overview
 
-## Dataset
-[Kaggle Credit Card Fraud Detection dataset](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) — 284,807 transactions, 
-492 labeled as fraud (0.17%). Features V1-V28 are PCA-transformed for privacy; 
-Time and Amount are the only original, interpretable features.
+Financial fraud is a major challenge for institutions due to the **extremely low occurrence rate of fraud transactions (~0.17%)** and evolving fraud patterns.
 
-## Approach
-1. **SQL Analysis** — queried fraud rate, transaction patterns by time and 
-   amount range (see `/sql/queries.sql`)
-2. **Excel Dashboard** — visualized findings with KPI summary and charts 
-   (see `/dashboard/dashboard.png`)
-3. **Machine Learning** — trained and compared Logistic Regression and 
-   Random Forest classifiers (see `/notebook/credit_fraud_analysis.ipynb`)
+This project focuses on:
 
-## Key Findings
-- Fraud rate: 0.17% of all transactions
-- Fraud transactions average ₹122 vs ₹88 for legitimate transactions
-- Higher-value transactions (≥₹1000) show a higher fraud rate (0.29%) than 
-  lower-value ones (0.17%)
-- Early morning hours (00:00-05:59) show the highest fraud rate
+- Identifying fraud patterns using SQL and Excel
+- Building machine learning models to detect fraudulent transactions
+- Generating actionable insights for risk analysis
 
-## Dashboard
+---
+
+## 🎯 Objective
+
+- Analyze transaction data to detect fraud patterns  
+- Understand behavioral trends in fraudulent activity  
+- Build predictive models for fraud detection  
+- Present insights using a dashboard for decision-making  
+
+---
+
+## 📊 Dataset
+
+- **Source:** Kaggle Credit Card Fraud Detection Dataset (https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
+- **Total Transactions:** 284,807  
+- **Fraud Cases:** 492 (~0.17%)  
+
+### 📌 Important Notes:
+- Features **V1–V28** are PCA-transformed (privacy reasons)  
+- Only **Time** and **Amount** are interpretable features  
+
+---
+
+## 🛠️ Tools & Technologies
+
+- **SQL** → Data analysis & feature extraction  
+- **Excel** → Dashboard & visualization  
+- **Python (Pandas, Scikit-learn)** → Machine Learning  
+- **Jupyter Notebook** → Model development  
+
+---
+
+## 🔍 Project Workflow
+
+### 1️⃣ Data Analysis (SQL)
+
+Performed:
+
+- Fraud vs Non-Fraud distribution  
+- Amount-based fraud analysis  
+- Time-based fraud trends  
+- High-value transaction risk analysis  
+
+---
+
+### 2️⃣ Dashboard (Excel)
+
+Built an interactive dashboard with:
+
+- KPI summary  
+- Fraud distribution chart  
+- Fraud rate by transaction amount  
+- Fraud rate by time window  
+- High vs low-value transaction risk  
+
 ![Dashboard](dashboard/dashboard.png)
+---
+
+### 3️⃣ Machine Learning
+
+#### Model 1: Logistic Regression
+- Used as baseline model  
+- Applied `class_weight='balanced'` to handle imbalance  
+
+#### Model 2: Random Forest
+- Captures non-linear relationships  
+- Better performance in fraud detection  
+
+---
+
+## 📈 Key Insights
+
+- Fraud transactions are extremely rare (~0.17% of total transactions)  
+- Majority of fraud transactions occur in **low-value transactions (<100)**  
+- Early time windows show relatively higher fraud activity  
+- High-value transactions have higher fraud risk percentage  
+
+---
+
+## 📊 Business Impact
+
+- Helps identify **high-risk transaction patterns**  
+- Supports fraud monitoring based on **time and amount trends**  
+- Can assist financial institutions in improving **fraud detection systems**  
+- Enables better **risk-based decision making**  
+
+---
+
+## 🤖 Model Evaluation
+
+Evaluation Metrics Used:
+
+- Precision  
+- Recall  
+- F1 Score  
+
+> Recall is prioritized to minimize missed fraud cases.
 
 ## Model Results
 
@@ -42,19 +122,3 @@ Time and Amount are the only original, interpretable features.
 | 0.5 (default) | 0.27 | 0.89 | 0.41 |
 | 0.7 | 0.69 | 0.87 | 0.77 |
 | 0.9 | 0.84 | 0.74 | 0.79 |
-
-**Business Insight:** The default threshold produced high recall but very low 
-precision, meaning excessive false alarms. Raising the decision threshold to 0.9 
-improved precision to 0.84 while keeping recall reasonably high at 0.74 — a far 
-more production-realistic balance, since a real fraud team can't act on a flood 
-of false positives. This demonstrates that model selection alone isn't 
-sufficient; tuning the decision threshold to match business cost tradeoffs 
-(cost of missing fraud vs. cost of false alarms) is equally important.
-
-## Tech Stack
-Python, Pandas, Scikit-learn, SQL, Excel
-
-## Future Improvements
-- Try XGBoost/LightGBM for potentially better performance
-- Use SMOTE for oversampling instead of class weighting
-- Deploy as a simple API endpoint
